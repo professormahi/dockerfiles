@@ -3,9 +3,8 @@ You can have texmaker with latex (`texlive 2017`) redirected to your X.
 
 ## To run
 ```bash
-
 docker run -it --rm=true \
-  -e USER=$USER -e USERID=$UID \		# bind user for file permissions
+    -e USER=$USER -e USERID=$UID \		# bind user for file permissions
 	-v /tmp/.X11-unix:/tmp/.X11-unix \ 	# mount the X11 socket
 	-e DISPLAY=unix$DISPLAY \ 			# pass the display
 	--device /dev/dri \
