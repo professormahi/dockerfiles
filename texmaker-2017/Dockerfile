@@ -60,10 +60,18 @@ RUN tar xvfz gnu-fonts.tar.gz
 RUN mkdir -p /usr/share/fonts/truetype/GNUFonts/
 RUN mv freefont-20060126/*.ttf /usr/share/fonts/truetype/GNUFonts/
 
-USER texmaker
-WORKDIR /home/texmaker
 
 # Install XePersian and bidi packeges
-RUN tlmgr init-usertree && tlmgr install xepersian && tlmgr install bidi
+RUN tlmgr init-usertree
+RUN tlmgr install xepersian && tlmgr install bidi
+
+RUN cp -R /root/texmf/* /usr/share/texlive/texmf-dist/
+RUN rm -rf /root/texmf/
+
+RUN texhash
+
+
+USER texmaker
+WORKDIR /home/texmaker
 
 ENTRYPOINT [ "texmaker" ]
